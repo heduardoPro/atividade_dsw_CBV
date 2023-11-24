@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row" style="display: flex; justify-content: space-between; margin: 0.5rem;">
+    <h2> Lista de Hospedagens</h2>
+  
+    <a href="{% url 'hospedagem:hospedagem_criar' %}" class="btn btn-success mb-3">Novo Cadastro</a>
+  </div>
+
+  <form method="get" style="margin-bottom: 2rem;">
+   
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="nome" class="form-label">Data de Entrada</label>
+        {{ form.data_entrada }}
+    </div>
+      <div class="col-md-4 mb-3">
+          <label for="cidade" class="form-label">Data de Saída</label>
+          {{ form.data_saida }}
+      </div>
+  </div>
+
+      <div class="row">
+
+      <div class="col-md-4 mb-3">
+          <label for="cliente" class="form-label">Cliente</label>
+          {{ form.cliente }}
+      </div>
+
+      <div class="col-md-4 mb-3">
+          <label for="quarto" class="form-label">Quarto</label>
+          {{ form.quarto }}
+      </div>
+
+    </div>
+  
+      <button type="submit" class="btn btn-primary">Filtrar</button>
+  </form>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th style="width: 30%;">Cliente</th> 
+        <th style="width: 30%;">Quarto</th>   
+        <th style="width: 40%;">Ações</th>    
+      </tr>
+    </thead>
+    <tbody>
+      {% for hospedagem in hospedagens %}  
+      <tr>
+        <td> <a href="{% url 'hospedagem:hospedagem_detalhar' id=hospedagem.id %}"> {{ hospedagem.cliente.nome }} </a></td>
+        <td>{{ hospedagem.quarto.apartamento }}</td>
+        <td>
+          <a href="{% url 'hospedagem:hospedagem_editar' id=hospedagem.id %}" class="btn btn-info btn-sm">Editar</a>
+          <span style="margin-right: 5px;"></span> 
+          <a href="{% url 'hospedagem:hospedagem_remover' id=hospedagem.id %}" class="btn btn-danger btn-sm">Remover</a>
+        </td>
+      </tr>
+
+      {% endfor %}
+    
+    </tbody>
+  </table>
+
+  {% include 'hospedagem/pagination.html' %}
+{% endblock content %}

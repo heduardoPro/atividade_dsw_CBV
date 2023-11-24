@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row" style="display: flex; justify-content: space-between; margin: 0.5rem;">
+
+        <h2> Formulário de Hospegagem do CBV</h2>
+        
+        <a href="{% url 'hospedagem:hospedagem_listar' %}" class="btn btn-primary mb-3">Voltar</a>
+    
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="data_entrada" class="form-label">Data de Entrada</label>
+            {{ form.data_entrada }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="data_saida" class="form-label">Data de Saída</label>
+            {{ form.data_saida }}
+        </div>
+
+        <div class="mb-3">
+            <label for="valor" class="form-label">Valor</label>
+            {{ form.valor }}
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="cliente" class="form-label">Cliente</label>
+            {{ form.cliente }}
+        </div>
+
+        <div class="mb-3">
+            <label for="quarto" class="form-label">Quarto</label>
+            {{ form.quarto }}
+        </div>
+
+        <button type="submit" class="btn btn-success">Enviar</button>
+    </form> 
+
+{% endblock content %}
+   
